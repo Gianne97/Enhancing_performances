@@ -1,0 +1,10 @@
+v 4
+file . "para_S.vhdl" "d3685ca400918e9098790345f45d68df944ce025" "20201120102844.629":
+  entity para_s at 1( 0) + 0 on 93;
+  architecture behavior of para_s at 20( 456) + 0 on 94;
+file . "clockgen.vhd" "6e6abded3f333a34c6ee4452334095312ac448d2" "20201120102844.626":
+  entity clkgen at 2( 19) + 0 on 91;
+  architecture behavior of clkgen at 10( 124) + 0 on 92;
+file . "tb_para_s.vhdl" "5e42ad6b0cad5037a5d73b2f392a64f1e7b13721" "20201120102844.623":
+  entity testbench at 1( 0) + 0 on 89;
+  architecture tb of testbench at 8( 107) + 0 on 90;
