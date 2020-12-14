@@ -9,7 +9,7 @@ use IEEE.numeric_std.all;
 
 entity_dec="""entity R_block is
     generic (
-      PRECISION_FP    :   integer := 9
+      PRECISION_FP    :   integer := 9 -- why 9 instead of B?
     );
     port(
       sigma : in std_logic_vector(0 to PRECISION_FP-1);
