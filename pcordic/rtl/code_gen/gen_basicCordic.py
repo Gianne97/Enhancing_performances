@@ -1,9 +1,9 @@
 import math
 
 #specify the number of bits WITHOUT the sign bit
-numberOfBits = 16
+numberOfBits = 32
 #specify the numbe of iterations for the cordic basic algorithm
-numberOfIterations = 15
+numberOfIterations = 20 #max up to 50
 
 def printIncludes():
     includes="""library IEEE;
@@ -47,6 +47,24 @@ def printArchitectureDeclarations(nmbBits, nmbIterations):
             print("\t\tto_sfixed(" + bufferStr + ", 1, - PRECISION_FP)")
     
     print(");")
+    archi2 = """
+    type mul_factor is array (0 to """ + str(nmbIterations - 1) + """) of sfixed(1 downto - PRECISION_FP);
+    constant LUT_K : mul_factor := ("""
+    print(archi2)
+    max_value = 27
+    i = np.arange(0, max_value, 1)
+    nth = 1/np.sqrt(1 + (1/2)**(2*i))
+    res = np.cumprod(nth)
+    for i in range(nmbIterations):
+        if i < max_value-1:
+            bufferStr = "{:.15f}".format(res[i])
+        else:
+            bufferStr = "{:.15f}".format(res[max_value-1])
+        if i < nmbIterations - 1:
+            print("\t\tto_sfixed(" + bufferStr + ", 1, - PRECISION_FP),")
+        else:
+            print("\t\tto_sfixed(" + bufferStr + ", 1, - PRECISION_FP)")
+    print(");")
 
 def printArchitecture():
     archi = """
@@ -76,11 +94,11 @@ begin
                         -- perfrom the first rotation/iteration
                         if z > 0 then
                             -- input angle is positive
-                            x := to_sfixed(0.6072, 1, -PRECISION_FP);
+                            x := LUT_K(NMB_ITERATIONS-1);
                             y := x;
                             z := resize(arg => z - LUTangles(0), size_res => z);
                         elsif z < 0 then
-                            x := to_sfixed(0.6072, 1, -PRECISION_FP);
+                            x := LUT_K(NMB_ITERATIONS-1);
                             y := resize(-x, 1, -PRECISION_FP);
                             z := resize(arg => z + LUTangles(0), size_res => z);
                         else
@@ -129,10 +147,10 @@ begin
                     state := state + 1;
                 end if;
             else
-                -- inactiva state, set all outputs to their inital values
+                -- inactive state, set all outputs to their inital values
                 rdy_o <= '0';
                 state := 0;
-                sin_o <= to_sfixed(0.6072, 1, -PRECISION_FP);
+                sin_o <= LUT_K(NMB_ITERATIONS-1);
                 cos_o <= to_sfixed(0, 1, -PRECISION_FP);        
             end if;
         end if;
