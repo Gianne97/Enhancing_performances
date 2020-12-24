@@ -1,9 +1,14 @@
 import math
+import numpy as np
 
 #specify the number of bits WITHOUT the sign bit
 numberOfBits = 32
+
 #specify the numbe of iterations for the cordic basic algorithm
-numberOfIterations = 20 #max up to 50
+numberOfIterations = 40 #max up to 50
+
+#specify the input angle in radians
+input_angle = 0.15123
 
 def printIncludes():
     includes="""library IEEE;
@@ -18,7 +23,7 @@ def printEntity(nmbBits, nmbIterations):
     entity_dec="""entity basic_cordic is
     GENERIC (
         NMB_ITERATIONS  :   integer := """ + str(nmbIterations) + """;
-        PRECISION_FP    :   integer := """ + str(numberOfBits - 1) + """
+        PRECISION_FP    :   integer := """ + str(nmbBits - 1) + """
     );
     """
     print(entity_dec)
@@ -69,7 +74,6 @@ def printArchitectureDeclarations(nmbBits, nmbIterations):
 def printArchitecture():
     archi = """
 begin
-
     algorithm : process(clock_i)
         variable state : integer := 0;
         variable z : sfixed (1 downto - PRECISION_FP);
@@ -90,7 +94,6 @@ begin
                     if state = 0 then
                         -- if the input angle is negativ, make it positive and save the sign
                         z := resize(arg => angle_i, size_res => z);
-
                         -- perfrom the first rotation/iteration
                         if z > 0 then
                             -- input angle is positive
@@ -123,7 +126,6 @@ begin
                             else
                                 y := resize(arg => (y + (bufx srl state)), size_res => y);
                             end if;
-
                             z := resize(arg => z - LUTangles(state), size_res => z);
                         else
                             bufx := x;
