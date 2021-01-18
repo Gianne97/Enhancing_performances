@@ -4,46 +4,46 @@ use IEEE.numeric_std.all;
 
 entity para_S is
   generic (
-    PRECISION_FP    :   integer := 16;
+    B    :   integer := 16;
     PARAMETER_RI : integer
     );      
   port(
     sigma : in std_logic;
-    x_i : in signed(0 to PRECISION_FP-1);
-    y_i : in signed(0 to PRECISION_FP-1);
-    x_o : out signed(0 to PRECISION_FP-1);
-    y_o : out signed(0 to PRECISION_FP-1));
+    x_i : in signed(0 to B-1);
+    y_i : in signed(0 to B-1);
+    x_o : out signed(0 to B-1);
+    y_o : out signed(0 to B-1));
 end entity para_S;
 
 architecture beh of para_S is
-  signal shifted_x : signed(0 to PRECISION_FP-1);
-  signal shifted_y : signed(0 to PRECISION_FP-1);
+  signal shifted_x : signed(0 to B-1);
+  signal shifted_y : signed(0 to B-1);
 
-  signal add1 : signed(0 to PRECISION_FP-1);
-  signal add2 : signed(0 to PRECISION_FP-1);
-  signal sub1 : signed(0 to PRECISION_FP-1);
-  signal sub2 : signed(0 to PRECISION_FP-1);
-  signal add : signed(0 to PRECISION_FP-1);        
-  signal sub : signed(0 to PRECISION_FP-1);
+  signal add1 : signed(0 to B-1);
+  signal add2 : signed(0 to B-1);
+  signal sub1 : signed(0 to B-1);
+  signal sub2 : signed(0 to B-1);
+  signal add : signed(0 to B-1);        
+  signal sub : signed(0 to B-1);
 
   component shifter is
     generic(
-      PRECISION_FP    :   integer := 9;
+      B    :   integer := 9;
       PARAMETER_RI : integer);
     port(
-      x_i : in signed(0 to PRECISION_FP-1);
-      x_o : out signed(0 to PRECISION_FP-1));
+      x_i : in signed(0 to B-1);
+      x_o : out signed(0 to B-1));
   end component shifter;
   
   
 begin  
 
   sh1: shifter
-    generic map(PRECISION_FP=>PRECISION_FP,PARAMETER_RI=>PARAMETER_RI)
+    generic map(B=>B,PARAMETER_RI=>PARAMETER_RI)
     port map(x_i=>x_i,x_o=>shifted_x);
 
   sh2: shifter
-    generic map(PRECISION_FP=>PRECISION_FP,PARAMETER_RI=>PARAMETER_RI)
+    generic map(B=>B,PARAMETER_RI=>PARAMETER_RI)
     port map(x_i=>y_i,x_o=>shifted_y);
 
   
