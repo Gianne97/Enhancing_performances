@@ -22,7 +22,7 @@ R_block.vhdl:
 	python3 scripts/gen_R_block.py $(B) > $@
 
 tb_pcordic.vhdl:
-	python3 scripts/gen_tb.py --B=$(B) --theta=[0.1,0.2,0.5]
+	python3 scripts/gen_tb.py --B=$(B) --theta=$(theta)
 
 % : %.vhdl
 	$(VHDL_SIM) -a $< 
