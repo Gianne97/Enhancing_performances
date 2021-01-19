@@ -16,12 +16,11 @@ end entity shifter;
 architecture beh of shifter is
 
 begin
-  x_o(0)<=x_i(0);
-  
+  x_o(0)<=x_i(0);  
   x_o(1 to PARAMETER_RI)<=(others=>'0') when x_i(0)='0' else
                            (others=>'1');
-  x_o(PARAMETER_RI+1 to B-1)<=x_i(1 to B-1-PARAMETER_RI) when x_i(0)='0' else
-                              x_i(0 to B-1-PARAMETER_RI-1);
+  x_o(PARAMETER_RI+1 to B-1)<=x_i(1 to B-1-PARAMETER_RI);
+
 
 end architecture beh;
   
