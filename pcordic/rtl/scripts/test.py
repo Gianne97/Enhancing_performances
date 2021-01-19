@@ -1,0 +1,18 @@
+from bin_conv import *
+'''
+print(1+fixed2float(float2bbr(binStr2float("00001100110011001100110011001100", 32),32),32))
+print(1+fixed2float(float2bbr(binStr2float("00001100111010101110101010100000", 32),32),32))
+print(1+fixed2float(float2bbr(binStr2float("01111110010101101001010111000001", 32),32),32))
+print(1+fixed2float(float2bbr(binStr2float("00011001100110011001100110011001", 32),32),32))
+print(1+fixed2float(float2bbr(binStr2float("00011001001011101101011000011000", 32),32),32))
+print(1+fixed2float(float2bbr(binStr2float("01111100011110011001101011110101", 32),32),32))
+print("===================")
+print(fixed2float(float2bbr(binStr2float("11110011001100110011001100110011", 32),32),32))
+print(fixed2float(float2bbr(binStr2float("01110101101010000011001101011100", 32),32),32))
+print(fixed2float(float2bbr(binStr2float("11110010010100010100001001110011", 32),32),32))
+'''
+print(binStr2float("11110011001100110011001100110011",32))
+print(binStr2float("01110101101010000011001101011100",32))
+print(binStr2float("11110010010100010100001001110011",32))
+
+
