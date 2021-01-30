@@ -5,7 +5,7 @@ echo "starting evaluation"
 
 
 
-cd ../pcordic-fpax/rtl/
+cd ../para-CORDIC/rtl/
 #for each B calcualte different sin/cos values and save the value in a file
 for _B in 16 24 32 54 64
 do
