@@ -51,6 +51,7 @@ def binStr2float(ss,BB):
             x+=1/2**i
     return x
 
+
 def print_bin(x,BB):
     shifter=2**(BB-1)
     ss=""
