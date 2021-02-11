@@ -63,3 +63,17 @@ def print_bin(x,BB):
         shifter=shifter>>1
     return ss
 
+def fixed2bbr1(x):
+    if x[0]==1:
+        x[0]=0
+    else:
+        x[0]=1
+    return x
+def fixed2bbr(x,BB):
+    bbr=x
+    shifter=2**(BB-1)
+    if x&shifter:
+        bbr&=~shifter        
+    else:
+        bbr|=shifter
+    return bbr
