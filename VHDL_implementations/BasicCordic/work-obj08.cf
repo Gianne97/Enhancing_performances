@@ -1,0 +1,10 @@
+v 4
+file . "tb_basicCordic.vhd" "895d8231b3a0aab49e49cc9dedcd8bf6c2113610" "20210213182300.928":
+  entity testbench at 1( 0) + 0 on 243;
+  architecture tb of testbench at 13( 273) + 4 on 244;
+file . "basicCordic.vhd" "0b68445f2a816ae57955d88b520e90ed0364258a" "20210213182300.933":
+  entity basic_cordic at 1( 0) + 0 on 247;
+  architecture behavior of basic_cordic at 22( 573) + 0 on 248;
+file . "clockgen.vhd" "610170784a16fd0945b1eb96e92645d5f0d3ba95" "20210213182300.929":
+  entity clkgen at 2( 19) + 0 on 245;
+  architecture behavior of clkgen at 10( 124) + 0 on 246;
