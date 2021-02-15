@@ -1,0 +1,12 @@
+make clean
+
+For pcordic run:
+
+make pcordic_sim B=<B> theta=<>
+make sim
+
+
+For fpax run:
+
+make fpax_sim B=<B> p=<p> theta=<>
+make sim
