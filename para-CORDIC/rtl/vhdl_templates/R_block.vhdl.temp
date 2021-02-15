@@ -5,11 +5,11 @@ use IEEE.numeric_std.all;
 entity R_block is
   generic (
     B    :   integer := 16;
-    L    :   integer := 4
+    L    :   integer := 4                 -- B=16, L=5; B=24, L=8; B=32, L=11
     );
   port(
     sigma : in std_logic_vector(0 to L-1);
-    x_i : in signed(0 to B-1);
+    x_i : in signed(0 to B-1);            -- It must be signed(0 to B)
     y_i : in signed(0 to B-1);
     x_o : out signed(0 to B-1);
     y_o : out signed(0 to B-1)
