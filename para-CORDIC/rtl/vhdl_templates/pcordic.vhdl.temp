@@ -4,12 +4,12 @@ use IEEE.numeric_std.all;
 
 entity pcordic is
     generic(
-      B    :   integer := 16;
-      L    :   integer := 4
+      B    :   integer := 16;                       
+      L    :   integer := 4                         -- B=16, L=5; B=24, L=8; B=32, L=11
     );
     port(
       clk : in std_logic;
-      theta : in signed(0 to B-1);      
+      theta : in signed(0 to B-1);                  -- All the signals must be: signed(0 to B)
       x_o : out signed(0 to B-1);
       y_o : out signed(0 to B-1)
     );
@@ -17,11 +17,11 @@ end entity pcordic;
 
 architecture beh of pcordic is
 
-  signal sigma_L : std_logic_vector(0 to L-1);
+  signal sigma_L : std_logic_vector(0 to L-1);      -- correct
 
-  signal theta_H1 : signed(0 to B-L);
-  signal theta_H2 : signed(0 to B-L);         
-  signal sigma_H : std_logic_vector(0 to B-L-1);
+  signal theta_H1 : signed(0 to B-L);               -- correct
+  signal theta_H2 : signed(0 to B-L);               -- it should be: signed(0 to B - (L-1)) --> length: B - L + 2
+  signal sigma_H : std_logic_vector(0 to B-L-1);    -- it should be: signed(0 to B - (L-1)) --> length: B - L + 2
   
   signal x0 : signed(0 to B-1);
   signal y0 : signed(0 to B-1);
@@ -34,7 +34,7 @@ architecture beh of pcordic is
         L : integer := 4
     );
     port(
-      sigma : in std_logic_vector(0 to L-1);      
+      sigma : in std_logic_vector(0 to L-1);        -- correct      
       x_i : in signed(0 to B-1);
       y_i : in signed(0 to B-1);
       x_o : out signed(0 to B-1);
@@ -48,9 +48,9 @@ architecture beh of pcordic is
         L : integer := 4
         );
         port(            
-            i_theta_H : in signed(0 to B-L);
-            sigma : in std_logic_vector(0 to L-1);
-            o_theta_H : out signed(0 to B-L)
+            i_theta_H : in signed(0 to B-L);        -- correct --> length: B - L + 1
+            sigma : in std_logic_vector(0 to L-1);  -- it should be: std_logic_vector(0 to L-2) since the last bit of sigma is not used (check the block scheme)
+            o_theta_H : out signed(0 to B-L)        -- it should be: signed(0 to B - (L-1)) --> length: B - L + 2 --> The output is longer than the input!!!
             );
     end component prec_add;
 
@@ -60,7 +60,7 @@ architecture beh of pcordic is
       L : integer := 4
       );
     port(
-      sigma : in std_logic_vector(0 to B-L-1);
+      sigma : in std_logic_vector(0 to B-L-1);      -- it should be: std_logic_vector(0 to B - (L-1)) --> length: B - L + 2
       x_i : in signed(0 to B-1);
       y_i : in signed(0 to B-1);
       x_o : out signed(0 to B-1);
@@ -69,14 +69,16 @@ architecture beh of pcordic is
   end component S_block;
 
 begin
-
+    
+    -- BBR_L, correct
   sigma_L(0)<=not theta(0);
   sigma_L(1 to L-1)<=std_logic_vector(theta(1 to L-1));
-
+    
+    -- BBR_H
   sigma_H(0)<=not theta_H2(0);
-  sigma_H(1 to B-L-1)<=std_logic_vector(theta_H2(1 to B-L-1));  
+  sigma_H(1 to B-L-1)<=std_logic_vector(theta_H2(1 to B-L-1));      -- it should be: sigma_H(1 to B-(L-1)) <= std_logic_vector(theta_H2(1 to B-(L-1)))
 
-  theta_H1<=theta(L-1 to B-1);
+  theta_H1<=theta(L-1 to B-1);      -- It should be theta_H1 <= theta(L to B)
   
   x0<="{0}";
   y0<=(others => '0');
@@ -98,9 +100,9 @@ begin
       B => B,L=>L
       )
     port map(
-      i_theta_H=>theta_H1,
-      sigma=>sigma_L,
-      o_theta_H=>theta_H2
+      i_theta_H => theta_H1,
+      sigma => sigma_L,             -- only the first L-1 bits of sigma_L are actually required!
+      o_theta_H => theta_H2
     );
 
   ss: S_block
