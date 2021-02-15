@@ -70,7 +70,7 @@ if __name__=="__main__":
     y=0
     print_xy(x,y,BB)
 
-    p=8
+    p=5
     nn=kk[(BB,p)]
     print(nn)
     for i in range(0,L):
@@ -102,4 +102,6 @@ if __name__=="__main__":
     theta=fixed2float(theta,BB)
     print(y/x)
     print(np.tan(theta))
+    print(theta)
+    print(BB)
 

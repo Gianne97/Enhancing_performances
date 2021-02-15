@@ -20,14 +20,19 @@ thetas = list()
 sins = list()
 coss = list()
 
-for i in range(7):
+for i in range(100):
     B = len(lines[i*3][6:])
     thetas.append(binStr2float(lines[i*3][6:], B))
     coss.append(binStr2float(lines[i*3+1][4:], B))
     sins.append(binStr2float(lines[i*3+2][4:], B))
 
 
-#calc the real values for the sins and the error
+with open("paraCordicResults_" + str(B) + ".txt","w") as f:
+    f.write("theta;cos(theta);sin(theta)\n")
+    for t,c,s in zip(thetas, coss, sins):
+        f.write(str(t) + ';' + str(c) + ';' + str(s) + "\n")
+
+'''
 errors_sin= list()
 errors_cos= list()
 for t,c,s in zip(thetas, coss, sins):
@@ -46,6 +51,7 @@ plt.ylabel('error in %')
 plt.grid()
 plt.legend()
 plt.savefig("errors_fpax_"+str(B))
+'''
 
 
 
