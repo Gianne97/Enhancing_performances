@@ -1,28 +1,46 @@
 VHDL_SIM= ghdl
 
 
-tb: shifter para_S R_block prec_add S_block pcordic tb_pcordic
+
+pcordic_sim: pcordic_files shifter para_S S_block R_block prec_add pcordic tb
+fpax_sim: fpax_files shifter para_S S_block R_block fpax tb
+
+pcordic_files:
+	cd scripts && python3 gen_pcordic.py --alg=pcordic --B=$(B)
+	mv -f scripts/*.vhdl .
+	python3 scripts/gen_tb.py --alg=pcordic --B=$(B) --theta=$(theta)
+
+fpax_files:
+	cd scripts && python3 gen_pcordic.py --alg=fpax --B=$(B) --p=$(p)
+	mv -f scripts/*.vhdl .
+	python3 scripts/gen_tb.py --alg=fpax --B=$(B) --theta=$(theta)
 
 
-all: tb
+R_block:
+	ghdl -a R_block.vhdl
+	ghdl -e R_block
+
+prec_add:
+	ghdl -a prec_add.vhdl
+	ghdl -e prec_add
+
+pcordic:
+	ghdl -a pcordic.vhdl
+	ghdl -e pcordic
+
+fpax:
+	ghdl -a fpax.vhdl
+	ghdl -e fpax
+
+tb:
+	ghdl -a tb.vhdl
+	ghdl -e tb
 
 sim:
-	ghdl -r tb_pcordic $(FLAGS) | python3 scripts/display_rep.py
+	ghdl -r tb $(FLAGS) | python3 scripts/display_rep.py
 
 wave:
-	ghdl -r tb_pcordic  --vcd=wave1.vcd
-
-pcordic.vhdl:
-	python3 scripts/gen_pc.py --B=$(B) --name=pcordic.vhdl > $@
-
-prec_add.vhdl:
-	python3 scripts/gen_pc.py --B=$(B) --name=prec_add.vhdl > $@
-
-R_block.vhdl:	
-	python3 scripts/gen_R_block.py $(B) > $@
-
-tb_pcordic.vhdl:
-	python3 scripts/gen_tb.py --B=$(B) --theta=$(theta)
+	ghdl -r tb  --vcd=wave1.vcd
 
 % : %.vhdl
 	$(VHDL_SIM) -a $< 
@@ -30,6 +48,6 @@ tb_pcordic.vhdl:
 
 clean:
 	echo $(tb)
-	rm -f prec_add.vhdl R_block.vhdl pcordic.vhdl tb_pcordic.vhdl wave1.vcd *.cf
+	rm -f prec_add.vhdl R_block.vhdl pcordic.vhdl fpax.vhdl tb.vhdl wave1.vcd *.cf
 
 .PHONY: sim tb wave
