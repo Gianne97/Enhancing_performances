@@ -1,0 +1,24 @@
+This file lists the contributions to the project of each group member
+
+Giacomo Giannetti, team leader and math expert
+coordination and supervision of the group and subdivision of the work 
+study and analysis of the three implemented algorithms (basic CORDIC, Para-CORDIC, FPAX-CORDIC)
+Matlab scripts calculating the constants necessary for each algorithm
+Matlab scripts simulating at bit level the Para-CORDIC and the FPAX-CORDIC
+Accuracy simulations for both Para and FPAX CORDIC
+writing and presentation of the abstract
+writing and presentation of both midterm presentations
+
+Benjamin Gräf, HDL expert
+VHDL description of the basic CORDIC
+VHDL description of the blocks para_S, para_S1 for the Para and FPAX CORDIC
+Python files to perform accuracy simulations for the basic CORDIC
+
+Zifei Li, HDL expert
+VHDL description of blocks para_R and shifter for the Para and FPAX CORDIC
+Comparisons between the three algorithms in terms of power, delay and area
+
+Amer Ahmic, Vivado and FPGA expert
+Python scripts for the generation of Para and FPAX CORDIC
+VHDL description of Para and FPAX CORDIC
+FPGA implementation of the three algorithms
