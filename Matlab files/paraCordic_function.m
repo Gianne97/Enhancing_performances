@@ -84,4 +84,10 @@ for i = m:(N+1)
     y = app_tan*x + y;
 end
 
+x_bin = float2bin(x, N, 0);
+y_bin = float2bin(y, N, 0);
+
+x = -(x_bin(1)) + sum(x_bin(2:end).*p2);
+y = -(y_bin(1)) + sum(y_bin(2:end).*p2);
+
 end

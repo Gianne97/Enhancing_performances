@@ -1,4 +1,4 @@
-    % Description
+% Description
 % -----------
 % This Matlab script tests the fpaxCordic algorithm.
 
@@ -10,15 +10,18 @@ N = 16; % possible values: 16, 24, 32
 p = 5;  % possible values: if N=16, 5, 8, 11, 14, 16; if N=24, 8, 11, 14, 17, 20, 22, 24; if N=32, 11, 14, 17, 20, 23, 26, 29, 32
 m = ceil((N - log2(3))/3);
 
+[m, n, s, e] = MAR(N, p);
+K = ScalingFactor_K(N, p, s);
+
 % Loading of the constants (see CORDIC_algorithms_v4.pdf)
-load('D:\Dropbox\Enhancing performances - SoC Design Laboratory\CORDIC algorithms\Constant values fpax-CORDIC\Microrotations_fpax_CORDIC.mat')
-values = cell2table(fpax_CORDIC(2:end, :), 'VariableNames', fpax_CORDIC(1, :));
-
-ind = and(values.N == N, values.p == p);
-
-n = values.n{ind}';
-s = values.s{ind}';
-K = values.K(ind);
+% load('D:\Dropbox\Enhancing performances - SoC Design Laboratory\CORDIC algorithms\Constant values fpax-CORDIC\Microrotations_fpax_CORDIC.mat')
+% values = cell2table(fpax_CORDIC(2:end, :), 'VariableNames', fpax_CORDIC(1, :));
+%
+% ind = and(values.N == N, values.p == p);
+%
+% n = values.n{ind}';
+% s = values.s{ind}';
+% K = values.K(ind);
 
 %% Input angles and evaluation
 n_points = 101;

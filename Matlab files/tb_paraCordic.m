@@ -10,10 +10,10 @@ N = 16;
 m = ceil((N - log2(3))/3);
 
 % Loading of the constants (see CORDIC_algorithms_v4.pdf)
-load('D:\Dropbox\Enhancing performances - SoC Design Laboratory\CORDIC algorithms\Constant values Para-CORDIC\errors.mat')
-load('D:\Dropbox\Enhancing performances - SoC Design Laboratory\CORDIC algorithms\Constant values Para-CORDIC\coefficients_s_i^j.mat')
-load('D:\Dropbox\Enhancing performances - SoC Design Laboratory\CORDIC algorithms\Constant values Para-CORDIC\number_of_coefficients_n(i).mat')
-load('D:\Dropbox\Enhancing performances - SoC Design Laboratory\CORDIC algorithms\Constant values Para-CORDIC\scaling_factors_K.mat')
+load('D:\Dropbox\Enhancing performances - SoC Design Laboratory\CORDIC algorithms\Matlab files\Constant values Para-CORDIC\errors.mat')
+load('D:\Dropbox\Enhancing performances - SoC Design Laboratory\CORDIC algorithms\Matlab files\Constant values Para-CORDIC\coefficients_s_i^j.mat')
+load('D:\Dropbox\Enhancing performances - SoC Design Laboratory\CORDIC algorithms\Matlab files\Constant values Para-CORDIC\number_of_coefficients_n(i).mat')
+load('D:\Dropbox\Enhancing performances - SoC Design Laboratory\CORDIC algorithms\Matlab files\Constant values Para-CORDIC\scaling_factors_K.mat')
 
 str = ['err = e', num2str(N), ';'];
 eval(str)
@@ -26,7 +26,8 @@ eval(str)
 
 %% Input angles and evaluation
 n_points = 101;
-theta = linspace(-pi/4, pi/4, n_points);
+% theta = linspace(-pi/4, pi/4, n_points);
+theta = [0.01, 0.1, 0.2, 0.201, 0.5];
 cos_theta = zeros(1, n_points);
 sin_theta = zeros(1, n_points);
 
