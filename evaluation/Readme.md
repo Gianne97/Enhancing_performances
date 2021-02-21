@@ -1,10 +1,18 @@
 EVALUATION of the cordic algorithms.
 
-So far only the evaluation of the fpax is implemented.
 
-To run the evaluation type:
+To run the evaluation of the FPAX algorithm type:
 
-./evaluate.sh
+./evalFpax.sh
+
+To run the evluation of the PARA cordic algorithm type:
+
+./evalPara.sh
+
+To run the evaluation of the basic cordic algorithm type:
+
+./evalBasicCordic.sh
 
 
-This script builds and runs the cordic algorithms for all available Bitlengths and for different input angles. It will then calcualte the errors to the real sin/cos values for the input angles and plot them.
+
+The scripts build and run the  algorithms for all available Bitlengths and for different input angles. It will then calcualte the errors to the real sin/cos values for the input angles and produce a output file with the results
