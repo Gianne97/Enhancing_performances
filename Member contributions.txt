@@ -8,6 +8,7 @@ Matlab scripts simulating at bit level the Para-CORDIC and the FPAX-CORDIC
 Accuracy simulations for both Para and FPAX CORDIC
 writing and presentation of the abstract
 writing and presentation of both midterm presentations
+writing of the final report
 
 Benjamin Gräf, HDL expert
 VHDL description of the basic CORDIC
