@@ -15,6 +15,7 @@ VHDL description of the basic CORDIC
 VHDL description of the blocks para_S, para_S1 for the Para and FPAX CORDIC
 Python files to perform accuracy simulations for the basic CORDIC
 bash scripts for evaluating the accuracy of the three algorithms implemented in VHDL
+organization of the GitHub repository
 
 Zifei Li, HDL expert
 VHDL description of blocks para_R and shifter for the Para and FPAX CORDIC
